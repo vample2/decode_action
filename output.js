@@ -1,7 +1,4 @@
-//Sun Sep 01 2024 10:35:29 GMT+0000 (Coordinated Universal Time)
-//Base:https://github.com/echo094/decode-js
-//Modify:https://github.com/smallfawn/decode_action
-//Sun Sep 01 2024 10:24:56 GMT+0000 (Coordinated Universal Time)
+//Sun Sep 01 2024 10:36:43 GMT+0000 (Coordinated Universal Time)
 //Base:https://github.com/echo094/decode-js
 //Modify:https://github.com/smallfawn/decode_action
 /*
@@ -1592,7 +1589,7 @@ async function bean() {
     // 不管哪个时区。得到都是当前时刻北京时间的时间戳 new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000
 
     //前一天的0:0:0时间戳
-    const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - 86400 * 1000;
+    const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - 1440 * 60 * 1000;
     // 今天0:0:0时间戳
     const tm1 = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000;
     let page = 1,
@@ -2226,7 +2223,7 @@ function getCoupon() {
         // 删除可使用且非超市、生鲜、京贴;
         let useable = data.coupon.useable;
         $.todayEndTime = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999)).getTime();
-        $.tomorrowEndTime = new Date(new Date(new Date().getTime() + 86400 * 1000).setHours(23, 59, 59, 999)).getTime();
+        $.tomorrowEndTime = new Date(new Date(new Date().getTime() + 1440 * 60 * 1000).setHours(23, 59, 59, 999)).getTime();
         $.platFormInfo = "";
         for (let i = 0; i < useable.length; i++) {
           //console.log(useable[i]);
