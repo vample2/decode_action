@@ -1,4 +1,4 @@
-//Sun Sep 01 2024 11:40:43 GMT+0000 (Coordinated Universal Time)
+//Sun Sep 01 2024 11:44:44 GMT+0000 (Coordinated Universal Time)
 //Base:https://github.com/echo094/decode-js
 //Modify:https://github.com/smallfawn/decode_action
 const _0x2e48f4 = require("./function/dylanv"),
@@ -34,7 +34,9 @@ async function getuserinfo_6dy() {
               $.isRealNameAuth = _0x2e7d27.data?.["userInfo"]?.["isRealNameAuth"] || "";
               $.beanCount = _0x2e7d27.data?.["assetInfo"]?.["beanNum"] || 0;
             }
-          } else $.log("京东服务器返回空数据");
+          } else {
+            $.log("京东服务器返回空数据");
+          }
         }
       } catch (_0x59b8d0) {
         $.logErr(_0x59b8d0, _0x864ac4);
@@ -58,7 +60,26 @@ async function _0x4abefe() {
   return new Promise(_0x439bd0 => {
     $.post(_0x52ba66, async (_0x14b1d5, _0x121b8b, _0xfca4f) => {
       try {
-        _0x14b1d5 ? (console.log("" + JSON.stringify(_0x14b1d5)), console.log("getuserinfo_6dy请求失败，请检查网路重试")) : ($.JingXiang = _0xfca4f.match(/"score":(\d+)/) ? _0xfca4f.match(/"score":(\d+)/)[1] : 0, $.beanCount = _0xfca4f.match(/"currentBeanNum":(\d+)/) ? _0xfca4f.match(/"currentBeanNum":(\d+)/)[1] : 0, $.nickName = _0xfca4f.match(/"showName":"(.*?)"/) ? _0xfca4f.match(/"showName":"(.*?)"/)[1] : $.UserName);
+        if (_0x14b1d5) {
+          console.log("" + JSON.stringify(_0x14b1d5));
+          console.log("getuserinfo_6dy请求失败，请检查网路重试");
+        } else {
+          if (_0xfca4f.match(/"score":(\d+)/)) {
+            $.JingXiang = _0xfca4f.match(/"score":(\d+)/)[1];
+          } else {
+            $.JingXiang = 0;
+          }
+          if (_0xfca4f.match(/"currentBeanNum":(\d+)/)) {
+            $.beanCount = _0xfca4f.match(/"currentBeanNum":(\d+)/)[1];
+          } else {
+            $.beanCount = 0;
+          }
+          if (_0xfca4f.match(/"showName":"(.*?)"/)) {
+            $.nickName = _0xfca4f.match(/"showName":"(.*?)"/)[1];
+          } else {
+            $.nickName = $.UserName;
+          }
+        }
       } catch (_0x161645) {
         $.logErr(_0x161645, _0x121b8b);
       } finally {
@@ -90,7 +111,9 @@ async function queryScores() {
     $.post(_0x1c120b, async (_0x59697b, _0x27beeb, _0x197f84) => {
       try {
         const _0x3062cf = JSON.parse(_0x197f84);
-        _0x3062cf.code == 1000 && ($.PlustotalScore = _0x3062cf.rs.userSynthesizeScore.totalScore);
+        if (_0x3062cf.code == 1000) {
+          $.PlustotalScore = _0x3062cf.rs.userSynthesizeScore.totalScore;
+        }
       } catch (_0x374719) {
         $.logErr(_0x374719, _0x27beeb);
       } finally {
@@ -124,7 +147,10 @@ async function fruitinfo() {
     };
     $.post(_0x123d29, (_0x54b2a0, _0x52fe81, _0x53c570) => {
       try {
-        if (_0x54b2a0) !llgeterror && (console.log("\n东东农场: API查询请求失败 ‼️‼️"), console.log(JSON.stringify(_0x54b2a0))), llgeterror = true;else {
+        if (_0x54b2a0) {
+          !llgeterror && (console.log("\n东东农场: API查询请求失败 ‼️‼️"), console.log(JSON.stringify(_0x54b2a0)));
+          llgeterror = true;
+        } else {
           llgeterror = false;
           if (safeGet(_0x53c570)) {
             $.farmInfo = JSON.parse(_0x53c570);
@@ -178,7 +204,13 @@ async function fruitnew(_0x394da0 = 500) {
     setTimeout(() => {
       $.get(_0x571dcc, (_0x178502, _0x23ab9d, _0x498ffa) => {
         try {
-          _0x178502 ? (console.log("新农场查询失败"), $.logErr(_0x178502)) : (_0x498ffa = JSON.parse(_0x498ffa), $.fruitnewinfo = _0x498ffa.data?.["result"] || "");
+          if (_0x178502) {
+            console.log("新农场查询失败");
+            $.logErr(_0x178502);
+          } else {
+            _0x498ffa = JSON.parse(_0x498ffa);
+            $.fruitnewinfo = _0x498ffa.data?.["result"] || "";
+          }
         } catch (_0x4dcea3) {
           $.logErr(_0x4dcea3, _0x23ab9d);
         } finally {
@@ -217,9 +249,18 @@ async function checkplus() {
   return new Promise(async _0x4187b6 => {
     $.post(_0x42eb51, async (_0x3b1b0c, _0xb31c02, _0x32028a) => {
       try {
-        if (_0x3b1b0c) console.log("" + JSON.stringify(_0x3b1b0c)), console.log(" API请求失败，请检查网路重试");else {
+        if (_0x3b1b0c) {
+          console.log("" + JSON.stringify(_0x3b1b0c));
+          console.log(" API请求失败，请检查网路重试");
+        } else {
           _0x32028a = JSON.parse(_0x32028a);
-          if (_0x32028a.code == 1711000) $.isPlusVip = _0x32028a.rs.plusUserBaseInfo.endDays ? true : false;else {}
+          if (_0x32028a.code == 1711000) {
+            if (_0x32028a.rs.plusUserBaseInfo.endDays) {
+              $.isPlusVip = true;
+            } else {
+              $.isPlusVip = false;
+            }
+          } else {}
         }
       } catch (_0x1d25e2) {
         $.logErr(_0x1d25e2, _0xb31c02);
